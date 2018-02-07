@@ -12,17 +12,17 @@ public class CollectionTestSuite {
         System.out.println("Test Case: end");
     }
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass(){
         System.out.println("Test Suite: begin");
     }
     @AfterClass
-    public static void afterClass() {
+    public static void afterClass(){
         System.out.println("Test Suite: end");
     }
     @Test
     public void testOddNumbersExterminatorEmptyList() {
         List<Integer> integerNumbersList = new ArrayList<>();
-        List<Integer> evenNumbersList = new ArrayList<>();
+        List<Integer> evenNumbersList;
         OddNumbersExterminator testEmptyList = new OddNumbersExterminator();
         evenNumbersList = testEmptyList.exterminate(integerNumbersList);
         System.out.println("Testing empty list");
@@ -31,7 +31,7 @@ public class CollectionTestSuite {
     @Test
     public void testOddNumbersExterminatorNormalList() {
         List<Integer> integerNumbersList = new ArrayList<>();
-        List<Integer> evenNumbersList = new ArrayList<>();
+        List<Integer> evenNumbersList;
         for (int i = 0; i < 11; i++){
             integerNumbersList.add(i);
         }
