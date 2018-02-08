@@ -38,6 +38,7 @@ public class CollectionTestSuite {
         OddNumbersExterminator testFilledList = new OddNumbersExterminator();
         evenNumbersList = testFilledList.exterminate(integerNumbersList);
         System.out.println("Testing filled list");
+        Assert.assertEquals(6,evenNumbersList.size());
         for (Integer number : evenNumbersList){
             Assert.assertEquals(0, number % 2);
         }

@@ -1,8 +1,5 @@
 package com.kodilla.testing;
-import com.kodilla.testing.collection.OddNumbersExterminator;
 import com.kodilla.testing.calculator.Calculator;
-import java.util.List;
-import java.util.ArrayList;
 
 public class TestingMain {
     public static void main(String[] args) {
@@ -11,7 +8,6 @@ public class TestingMain {
         System.out.print("Testing class Calculator, add() method: ");
         System.out.println((calculator.add(49, 51) == 100) ? "test OK" : "Error!");
         System.out.print("Testing class Calculator, subtract() method: ");
-        System.out.println((calculator.subtract(51, 49) == 2) ? "test OK" : "Error!");
-        System.out.println();
+        System.out.println((calculator.subtract(51, 49) == 2) ? "test OK. " : "Error!");
     }
 }
