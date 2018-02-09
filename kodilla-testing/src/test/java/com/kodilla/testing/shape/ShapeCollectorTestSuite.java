@@ -59,6 +59,7 @@ public class ShapeCollectorTestSuite {
         //When
         Shape retrievedFigure = shapeCollection.getFigure(0);
         //Then
+        System.out.println(retrievedFigure.getShapeName() + " : " + retrievedFigure.getField());
         Assert.assertEquals(shape,retrievedFigure);
     }
 }
