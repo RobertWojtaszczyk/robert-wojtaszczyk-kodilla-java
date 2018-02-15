@@ -1,6 +1,7 @@
 package com.kodilla.stream;
 import com.kodilla.stream.beautifier.PoemBeautifier;
 import com.kodilla.stream.beautifier.PoemDecorator;
+import com.kodilla.stream.iterate.NumbersGenerator;
 import com.kodilla.stream.reference.FunctionalCalculator;
 //import com.kodilla.stream.lambda.ExecuteSaySomething;
 //import com.kodilla.stream.lambda.ExpressionExecutor;
@@ -22,8 +23,10 @@ public class StreamMain {
             return result;
         };
         System.out.println(poemBeautifier.beautify("Tekst rozdzielony kropkami", lambdaExpression));
-        //nie wiem jak przerobić rekurencyjną metodę na wyrażenie lambda, skorzystałem z referencji do metody :)
         System.out.println(poemBeautifier.beautify(".kapsw ynasipan tskeT", FunctionalCalculator::reverseString));
+        //moduł 7.2
+        System.out.println("Using Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
         //materiał z modułu 7.1
         /*SaySomething saySomething = new SaySomething();
         saySomething.say();
