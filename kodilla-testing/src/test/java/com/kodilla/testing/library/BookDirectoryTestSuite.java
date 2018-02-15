@@ -1,9 +1,7 @@
 package com.kodilla.testing.library;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
@@ -79,9 +77,9 @@ public class BookDirectoryTestSuite {
         LibraryUser libraryUser = new LibraryUser("John","Smith","11223344556");
         when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOf0Books);
         //When
-        List<Book> theListOfBooks0 = bookLibrary.listBooksInHandsOf(libraryUser);
+        List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
         //Then
-        assertEquals(0, theListOfBooks0.size());
+        assertEquals(0, theListOfBooks.size());
     }
     @Test
     public void testListBooksInHandsOf1Book(){
@@ -92,9 +90,9 @@ public class BookDirectoryTestSuite {
         LibraryUser libraryUser = new LibraryUser("John","Smith","11223344556");
         when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOf1Book);
         //When
-        List<Book> theListOfBooks0 = bookLibrary.listBooksInHandsOf(libraryUser);
+        List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
         //Then
-        assertEquals(1, theListOfBooks0.size());
+        assertEquals(1, theListOfBooks.size());
     }
     @Test
     public void testListBooksInHandsOf5Books(){
@@ -105,8 +103,8 @@ public class BookDirectoryTestSuite {
         LibraryUser libraryUser = new LibraryUser("John","Smith","11223344556");
         when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOf5Books);
         //When
-        List<Book> theListOfBooks0 = bookLibrary.listBooksInHandsOf(libraryUser);
+        List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
         //Then
-        assertEquals(5, theListOfBooks0.size());
+        assertEquals(5, theListOfBooks.size());
     }
 }
