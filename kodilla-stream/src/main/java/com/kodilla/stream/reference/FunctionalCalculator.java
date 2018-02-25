@@ -13,6 +13,7 @@ public class FunctionalCalculator {
     public static double divideAByB(double a, double b) {
         return a / b;
     }
+
     public static String reverseString(String str)
     {
         if (str.isEmpty()) {

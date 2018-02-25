@@ -17,6 +17,7 @@ public class ForumUserTestSuite {
         ForumUser user8 = new ForumUser("thebigone", "Clay Small", "Orlando");
         ForumUser user9 = new ForumUser("user121212", "Marisa Frank", "Washington");
         ForumUser user10 = new ForumUser("lawyer", "Lexie John", "Miami");
+
         //When
         //Create relations for user1
         user1.addFriend(user3);
@@ -36,6 +37,7 @@ public class ForumUserTestSuite {
         user2.addFriend(user3);
         //Create relations for user9
         user9.addFriend(user3);
+
         //Then
         //user1 has 3 friends with following locations:
         //   user3:  "Key West"
@@ -47,6 +49,7 @@ public class ForumUserTestSuite {
         Assert.assertTrue(user1.getLocationOfFriends().contains("Miami"));
         Assert.assertFalse(user1.getLocationOfFriends().contains("Orlando"));
     }
+
     @Test
     public void testGetLocationsOfFriendsOfFriends(){
         //Given
