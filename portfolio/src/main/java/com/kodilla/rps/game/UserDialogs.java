@@ -25,7 +25,7 @@ public class UserDialogs {
 
     public static String getPlayerName() {
         Scanner keyboardInput = new Scanner(System.in);
-        System.out.println("ROCK \tPAPER \tSCISSORS");
+        System.out.println("ROCK! \tPAPER! \tSCISSORS! \t:)");
         System.out.print("Enter your name: ");
         return keyboardInput.nextLine();
     }

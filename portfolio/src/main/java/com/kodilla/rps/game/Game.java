@@ -7,57 +7,62 @@ public class Game {
     private Player computer;
     private CHOICE playersChoice;
     private CHOICE computersChoice;
+    private SCORE result;
     public Game(String name) {
         this.playerName = name;
     }
     public int getRoundCount() {
         return roundCount;
     }
+    public int getPlayerScore() { //????????? getter do gettera?
+        return player.getScore();
+    }
+    public int getComputerScore() { //?????????
+        return computer.getScore();
+    }
+    public String getPlayerName() { //?????????
+        return playerName;
+    }
     public void initializeGame() {
         player = new Player(playerName);
         computer = new Player("Computer");
     }
     public void playRound() {
-        System.out.println("Current score \n" + player.getName() + ": " + player.getScore() + "\nComputer: " + computer.getScore());
         playersChoice = UserDialogs.readChoice(playerName);
         computersChoice = computer.drawLots();
         System.out.println(player.getName() + ": " + playersChoice);
         System.out.println(computer.getName() + ": " + computersChoice);
         roundCount++;
-        result();
+        result = result(); // ?result = result()?
+        processResult();
         System.out.println("Current score \n" + player.getName() + ": " + player.getScore() + "\nComputer: " + computer.getScore());
     }
-    public void result() {
+    public void processResult() {
+        switch (result) {
+            case PLAYER:
+                System.out.println(player.getName() + " gets score");
+                player.setScore();
+                return;
+            case COMPUTER:
+                System.out.println("Computer gets score");
+                computer.setScore();
+                return;
+            case TIE:
+                System.out.println("It is a TIE!");
+                return;
+        }
+    }
+    public SCORE result() {
         if (playersChoice != computersChoice) {
                 switch (playersChoice) {
                     case PAPER:
-                        if (computersChoice == CHOICE.ROCK) {
-                            System.out.println("Player gets score for paper");
-                            player.setScore();
-                        } else {
-                            System.out.println("Computer gets score for paper");
-                            computer.setScore();
-                        }
-                        return;
+                        return computersChoice == CHOICE.ROCK ? SCORE.PLAYER : SCORE.COMPUTER;
                     case ROCK:
-                        if (computersChoice == CHOICE.SCISSORS) {
-                            System.out.println("Player gets score for rock");
-                            player.setScore();
-                        } else {
-                            System.out.println("Computer gets score for rock");
-                            computer.setScore();
-                        }
-                        return;
+                        return computersChoice == CHOICE.SCISSORS ? SCORE.PLAYER : SCORE.COMPUTER;
                     case SCISSORS:
-                        if (computersChoice == CHOICE.PAPER) {
-                            System.out.println("Player gets score for scissors");
-                            player.setScore();
-                        } else {
-                            System.out.println("Computer gets score for scissors");
-                            computer.setScore();
-                        }
-                        return;
+                        return computersChoice == CHOICE.PAPER ? SCORE.PLAYER : SCORE.COMPUTER;
                 }
         }
+        return SCORE.TIE;
     }
 }
