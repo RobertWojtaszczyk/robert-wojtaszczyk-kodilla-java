@@ -1,4 +1,6 @@
 package com.kodilla.rps.game;
+import com.kodilla.rps.game.definitions.CHOICE;
+
 import java.util.Scanner;
 
 public class UserDialogs {
@@ -38,5 +40,17 @@ public class UserDialogs {
             input = keyboardInput.nextLine();
         }
         return input.toLowerCase().charAt(0);
+    }
+    public static void showFinalStats(Game game) {
+        System.out.println("Number of rounds: " + game.getRoundCount());
+        System.out.println("Player " + game.getPlayer().getName() + ": " + game.getPlayer().getScore());
+        System.out.println("Computer wins: " + game.getComputer().getScore());
+        System.out.println("Number of ties: " + (game.getRoundCount() - game.getComputer().getScore() - game.getPlayer().getScore()));
+        if (game.getComputer().getScore() == game.getPlayer().getScore()) {
+            System.out.println("There is no winner. It's a TIE!");
+        } else {
+            String winner = game.getComputer().getScore() > game.getPlayer().getScore() ? "COMPUTER" : "PLAYER: " + game.getPlayer().getName();
+            System.out.println("The WINNER is " + winner + "!");
+        }
     }
 }

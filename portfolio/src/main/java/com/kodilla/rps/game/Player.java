@@ -1,4 +1,5 @@
 package com.kodilla.rps.game;
+import com.kodilla.rps.game.definitions.CHOICE;
 import java.util.Random;
 
 public class Player {
@@ -23,7 +24,9 @@ public class Player {
     }
 
     public CHOICE drawLots () {
-        int choice = generator.nextInt(3);
-        return CHOICE.values()[choice];
+        return CHOICE.values()[generator.nextInt(3)];
+    }
+    public int alterComputerChance() {
+        return generator.nextInt(4);
     }
 }

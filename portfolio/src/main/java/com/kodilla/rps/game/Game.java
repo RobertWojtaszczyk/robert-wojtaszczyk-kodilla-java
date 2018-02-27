@@ -1,41 +1,45 @@
 package com.kodilla.rps.game;
+import com.kodilla.rps.game.definitions.CHOICE;
+import com.kodilla.rps.game.definitions.SCORE;
 
 public class Game {
-    private String playerName;
     private int roundCount;
     private Player player;
     private Player computer;
     private CHOICE playersChoice;
     private CHOICE computersChoice;
     private SCORE result;
+
     public Game(String name) {
-        this.playerName = name;
+        player = new Player(name);
+        computer = new Player("Computer");
     }
     public int getRoundCount() {
         return roundCount;
     }
-    public int getPlayerScore() { //????????? getter do gettera?
-        return player.getScore();
+    public Player getPlayer() {
+        return player;
     }
-    public int getComputerScore() { //?????????
-        return computer.getScore();
+    public Player getComputer() {
+        return computer;
     }
-    public String getPlayerName() { //?????????
-        return playerName;
-    }
-    public void initializeGame() {
-        player = new Player(playerName);
-        computer = new Player("Computer");
-    }
-    public void playRound() {
-        playersChoice = UserDialogs.readChoice(playerName);
+    public CHOICE playRound() {
+        playersChoice = UserDialogs.readChoice(player.getName());
+        if (playersChoice == CHOICE.END) {
+            return CHOICE.END;
+        }
+        if (playersChoice == CHOICE.NEW) {
+            return CHOICE.NEW;
+        }
         computersChoice = computer.drawLots();
+        cheatDrawLots(); // do some tricks
         System.out.println(player.getName() + ": " + playersChoice);
         System.out.println(computer.getName() + ": " + computersChoice);
         roundCount++;
-        result = result(); // ?result = result()?
+        result = getResult();
         processResult();
         System.out.println("Current score \n" + player.getName() + ": " + player.getScore() + "\nComputer: " + computer.getScore());
+        return CHOICE.AGAIN;
     }
     public void processResult() {
         switch (result) {
@@ -52,7 +56,7 @@ public class Game {
                 return;
         }
     }
-    public SCORE result() {
+    public SCORE getResult() {
         if (playersChoice != computersChoice) {
                 switch (playersChoice) {
                     case PAPER:
@@ -64,5 +68,30 @@ public class Game {
                 }
         }
         return SCORE.TIE;
+    }
+    public void cheatDrawLots() {
+        int alteredChance = computer.alterComputerChance();
+        System.out.println("Altered chance: " + alteredChance);
+        alteredChance = alteredChance == 3 ? 2 : alteredChance;
+        switch (alteredChance) {
+            case 0:
+                if (playersChoice != computersChoice) {
+                    System.out.println("Giving another chance for a TIE! Computer choice was: " + computersChoice);
+                    computersChoice = computer.drawLots();
+                }
+                return;
+            case 1:
+                if (getResult() == SCORE.COMPUTER || getResult() == SCORE.TIE) {
+                    System.out.println("It would be TIE or Computer(" + computersChoice + ") would win! Giving player(" + playersChoice + ") another chance!");
+                    computersChoice = computer.drawLots();
+                }
+                return;
+            case 2:
+                if (getResult() == SCORE.PLAYER || getResult() == SCORE.TIE) {
+                    System.out.println("It would be TIE or Player (" + playersChoice + ")would win! Giving computer(" + computersChoice + ") another chance!");
+                    computersChoice = computer.drawLots();
+                }
+                return;
+        }
     }
 }
