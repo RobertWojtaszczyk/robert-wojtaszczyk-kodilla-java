@@ -1,5 +1,6 @@
 package com.kodilla.rps.game;
 import com.kodilla.rps.game.definitions.CHOICE;
+import com.kodilla.rps.game.definitions.Cases;
 import com.kodilla.rps.game.definitions.SCORE;
 
 public class Game {
@@ -56,7 +57,7 @@ public class Game {
                 return;
         }
     }
-    public SCORE getResult() {
+    /*public SCORE getResult() {
         if (playersChoice != computersChoice) {
                 switch (playersChoice) {
                     case PAPER:
@@ -66,6 +67,17 @@ public class Game {
                     case SCISSORS:
                         return computersChoice == CHOICE.PAPER ? SCORE.PLAYER : SCORE.COMPUTER;
                 }
+        }
+        return SCORE.TIE;
+    }*/
+    public SCORE getResult() {
+        if (playersChoice != computersChoice) {
+            return Cases.getCases().stream()
+                    .filter(cases -> cases.getPlayersChoice().equals(playersChoice) && cases.getComputersChoice().equals(computersChoice))
+                    .findFirst()
+                    //ifPresent(cases -> getResult())  ????error
+                    .get()
+                    .getResult();
         }
         return SCORE.TIE;
     }
