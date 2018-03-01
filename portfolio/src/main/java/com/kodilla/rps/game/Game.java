@@ -89,19 +89,19 @@ public class Game {
             case 0:
                 if (playersChoice != computersChoice) {
                     System.out.println("Giving another chance for a TIE! Computer choice was: " + computersChoice);
-                    computersChoice = computer.drawLots();
+                    computersChoice = computer.drawLots();// or chose proper result for computer?
                 }
                 return;
             case 1:
                 if (getResult() == SCORE.COMPUTER || getResult() == SCORE.TIE) {
                     System.out.println("It would be TIE or Computer(" + computersChoice + ") would win! Giving player(" + playersChoice + ") another chance!");
-                    computersChoice = computer.drawLots();
+                    computersChoice = computer.drawLots();// or chose proper result for computer?
                 }
                 return;
             case 2:
                 if (getResult() == SCORE.PLAYER || getResult() == SCORE.TIE) {
                     System.out.println("It would be TIE or Player (" + playersChoice + ")would win! Giving computer(" + computersChoice + ") another chance!");
-                    computersChoice = computer.drawLots();
+                    computersChoice = computer.drawLots();// or chose proper result for computer?
                 }
                 return;
         }
