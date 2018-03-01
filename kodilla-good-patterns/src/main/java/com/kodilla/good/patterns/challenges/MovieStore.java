@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 class MovieStore {
     public Map<String, List<String>> getMovies() {
@@ -29,14 +30,9 @@ class MovieStore {
 
     public static void main(String[] args) {
         MovieStore movieStore = new MovieStore();
-        //put stream to string, then print
         String stringOfMovies = movieStore.getMovies().entrySet().stream()
                 .flatMap(stringListEntry -> stringListEntry.getValue().stream())
-                .reduce("",(sum, current) -> sum = sum + current + "!");
+                .collect(Collectors.joining("!"));
         System.out.println(stringOfMovies);
-        //print directly
-        movieStore.getMovies().entrySet().stream()
-                .flatMap(stringListEntry -> stringListEntry.getValue().stream())
-                .forEach(title -> System.out.print(title + "!"));
     }
 }

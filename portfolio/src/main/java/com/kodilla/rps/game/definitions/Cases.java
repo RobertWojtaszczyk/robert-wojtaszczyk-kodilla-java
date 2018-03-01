@@ -28,11 +28,25 @@ public final class Cases {
     public static List<Cases> getCases() {
         final List<Cases> cases = new ArrayList<>();
         cases.add(new Cases(CHOICE.ROCK, CHOICE.SCISSORS, SCORE.PLAYER));
+        cases.add(new Cases(CHOICE.ROCK, CHOICE.LIZARD, SCORE.PLAYER));
         cases.add(new Cases(CHOICE.ROCK, CHOICE.PAPER, SCORE.COMPUTER));
+        cases.add(new Cases(CHOICE.ROCK, CHOICE.SPOCK, SCORE.COMPUTER));
         cases.add(new Cases(CHOICE.PAPER, CHOICE.ROCK, SCORE.PLAYER));
+        cases.add(new Cases(CHOICE.PAPER, CHOICE.SPOCK, SCORE.PLAYER));
         cases.add(new Cases(CHOICE.PAPER, CHOICE.SCISSORS, SCORE.COMPUTER));
+        cases.add(new Cases(CHOICE.PAPER, CHOICE.LIZARD, SCORE.COMPUTER));
         cases.add(new Cases(CHOICE.SCISSORS, CHOICE.PAPER, SCORE.PLAYER));
+        cases.add(new Cases(CHOICE.SCISSORS, CHOICE.LIZARD, SCORE.PLAYER));
         cases.add(new Cases(CHOICE.SCISSORS, CHOICE.ROCK, SCORE.COMPUTER));
+        cases.add(new Cases(CHOICE.SCISSORS, CHOICE.SPOCK, SCORE.COMPUTER));
+        cases.add(new Cases(CHOICE.SPOCK, CHOICE.SCISSORS, SCORE.PLAYER));
+        cases.add(new Cases(CHOICE.SPOCK, CHOICE.ROCK, SCORE.PLAYER));
+        cases.add(new Cases(CHOICE.SPOCK, CHOICE.PAPER, SCORE.COMPUTER));
+        cases.add(new Cases(CHOICE.SPOCK, CHOICE.LIZARD, SCORE.COMPUTER));
+        cases.add(new Cases(CHOICE.LIZARD, CHOICE.SPOCK, SCORE.PLAYER));
+        cases.add(new Cases(CHOICE.LIZARD, CHOICE.PAPER, SCORE.PLAYER));
+        cases.add(new Cases(CHOICE.LIZARD, CHOICE.ROCK, SCORE.COMPUTER));
+        cases.add(new Cases(CHOICE.LIZARD, CHOICE.SCISSORS, SCORE.COMPUTER));
         return new ArrayList<>(cases);
     }
 }
