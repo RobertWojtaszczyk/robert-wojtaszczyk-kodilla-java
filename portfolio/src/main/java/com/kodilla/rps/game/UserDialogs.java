@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class UserDialogs {
     public static CHOICE readChoice(String name) {
         System.out.println(name + ", enter your choice:");
-        System.out.println("1: ROCK \t2: PAPER \t 3: SCISSORS \t x: End of game \t n: New game");
+        System.out.println("1: ROCK \t2: PAPER \t 3: SCISSORS \t 4: SPOCK \t 5: LIZARD \t x: End of game \t n: New game");
         Scanner keyboardInput = new Scanner(System.in);
         char playerKeyboardInput = keyboardInput.next().toLowerCase().charAt(0);
         switch (playerKeyboardInput) {
@@ -16,6 +16,10 @@ public class UserDialogs {
                 return CHOICE.PAPER;
             case '3':
                 return CHOICE.SCISSORS;
+            case '4':
+                return CHOICE.SPOCK;
+            case '5':
+                return CHOICE.LIZARD;
             case 'x':
                 return CHOICE.END;
             case 'n':
@@ -28,9 +32,9 @@ public class UserDialogs {
     public static String getPlayerName() {
         Scanner keyboardInput = new Scanner(System.in);
         System.out.println("ROCK! \tPAPER! \tSCISSORS! \t:)");
-        for (CHOICE choice : CHOICE.values()) {
+        /*for (CHOICE choice : CHOICE.values()) {
             System.out.print(choice + "! \t");
-        }
+        }*/
         System.out.print("\nEnter your name: ");
         return keyboardInput.nextLine();
     }

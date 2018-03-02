@@ -24,7 +24,7 @@ public class Player {
     }
 
     public CHOICE drawLots () {
-        return CHOICE.values()[generator.nextInt(3)];
+        return CHOICE.values()[generator.nextInt(5)];
     }
     public int alterComputerChance() {
         return generator.nextInt(4);

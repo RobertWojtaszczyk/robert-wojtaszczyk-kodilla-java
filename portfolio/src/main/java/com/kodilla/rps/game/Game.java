@@ -33,7 +33,7 @@ public class Game {
             return CHOICE.NEW;
         }
         computersChoice = computer.drawLots();
-        cheatDrawLots(); // do some tricks
+        cheatDrawLots2(); // do some tricks
         System.out.println(player.getName() + ": " + playersChoice);
         System.out.println(computer.getName() + ": " + computersChoice);
         roundCount++;
@@ -81,6 +81,15 @@ public class Game {
         }
         return SCORE.TIE;
     }
+
+    public CHOICE setResult(SCORE score) {
+            return Cases.getCases().stream()
+                    .filter(cases -> cases.getPlayersChoice().equals(playersChoice) && cases.getResult().equals(score))
+                    .findAny()
+                    .get()
+                    .getComputersChoice();
+    }
+
     public void cheatDrawLots() {
         int alteredChance = computer.alterComputerChance();
         System.out.println("Altered chance: " + alteredChance);
@@ -103,6 +112,26 @@ public class Game {
                     System.out.println("It would be TIE or Player (" + playersChoice + ")would win! Giving computer(" + computersChoice + ") another chance!");
                     computersChoice = computer.drawLots();// or chose proper result for computer?
                 }
+                return;
+        }
+    }
+
+    public void cheatDrawLots2() {
+        int alteredChance = computer.alterComputerChance();
+        System.out.println("Altered chance: " + alteredChance);
+        alteredChance = alteredChance == 3 ? 2 : alteredChance;
+        switch (alteredChance) {
+            case 0:
+                System.out.println("Setting score to TIE!");
+                computersChoice = playersChoice;
+                return;
+            case 1:
+                System.out.println("Player is a winner");
+                computersChoice = setResult(SCORE.PLAYER);
+                return;
+            case 2:
+                System.out.println("Computer is a winner");
+                computersChoice = setResult(SCORE.COMPUTER);
                 return;
         }
     }
