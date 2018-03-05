@@ -9,12 +9,14 @@ public final class Data {
     public static Map<AircraftData, Flight> createFlights() {
         Flights flights = new Flights();
         flights.addFlights(new AircraftData("ABC121", "ASD120"), new Flight("Katowice", "Warszawa", LocalDateTime.now().plusMinutes(1950), 180));
+        flights.addFlights(new AircraftData("ABC121", "ASD221"), new Flight("Katowice", "Warszawa", LocalDateTime.now().plusMinutes(2100), 180));
         flights.addFlights(new AircraftData("ABC122", "ASD121"), new Flight("Krakow", "Wroclaw", LocalDateTime.now().plusMinutes(2000), 160));
         flights.addFlights(new AircraftData("ABC123", "ASD122"), new Flight("Warszawa", "Krakow", LocalDateTime.now().plusMinutes(2100), 190));
         flights.addFlights(new AircraftData("ABC124", "ASD123"), new Flight("Wroclaw", "Radom", LocalDateTime.now().plusMinutes(2300), 120));
         flights.addFlights(new AircraftData("ABC125", "ASD124"), new Flight("Radom", "Gdansk", LocalDateTime.now().plusMinutes(2300), 140));
         flights.addFlights(new AircraftData("ABC121", "ASD125"), new Flight("Gdansk", "Katowice", LocalDateTime.now().plusMinutes(2500), 210));
         flights.addFlights(new AircraftData("ABC122", "ASD126"), new Flight("Krakow", "Warszawa", LocalDateTime.now().plusMinutes(2500), 150));
+        flights.addFlights(new AircraftData("ABC123", "ASD227"), new Flight("Warszawa", "Wroclaw", LocalDateTime.now().plusMinutes(2000), 140));
         flights.addFlights(new AircraftData("ABC123", "ASD127"), new Flight("Warszawa", "Wroclaw", LocalDateTime.now().plusMinutes(2600), 140));
         flights.addFlights(new AircraftData("ABC124", "ASD128"), new Flight("Katowice", "Krakow", LocalDateTime.now().plusMinutes(2650), 180));
         flights.addFlights(new AircraftData("ABC125", "ASD129"), new Flight("Warszawa", "Radom", LocalDateTime.now().plusMinutes(2800), 160));
