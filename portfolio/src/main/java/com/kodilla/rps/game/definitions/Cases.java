@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Cases {
-    private CHOICE playersChoice;
-    private CHOICE computersChoice;
-    private SCORE result;
+    private final CHOICE playersChoice;
+    private final CHOICE computersChoice;
+    private final SCORE result;
 
-    public Cases(CHOICE playersChoice, CHOICE computersChoice, SCORE result) {
+    private Cases(final CHOICE playersChoice, final CHOICE computersChoice, final SCORE result) {
         this.playersChoice = playersChoice;
         this.computersChoice = computersChoice;
         this.result = result;

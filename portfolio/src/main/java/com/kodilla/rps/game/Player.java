@@ -1,11 +1,10 @@
 package com.kodilla.rps.game;
-import com.kodilla.rps.game.definitions.CHOICE;
 import java.util.Random;
 
 public class Player {
     private String name;
     private int score;
-    Random generator = new Random();
+    private Random generator = new Random();
 
     public Player(String name) {
         this.name = name;
@@ -21,12 +20,10 @@ public class Player {
 
     public void setScore() {
         this.score += 1;
+        System.out.println(name + " gets score!");
     }
 
-    public CHOICE drawLots () {
-        return CHOICE.values()[generator.nextInt(5)];
-    }
     public int alterComputerChance() {
-        return generator.nextInt(4);
+        return generator.nextInt(100) + 1;
     }
 }

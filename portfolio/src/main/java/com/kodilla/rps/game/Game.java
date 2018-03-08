@@ -2,18 +2,22 @@ package com.kodilla.rps.game;
 import com.kodilla.rps.game.definitions.CHOICE;
 import com.kodilla.rps.game.definitions.Cases;
 import com.kodilla.rps.game.definitions.SCORE;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
     private int roundCount;
+    private int numberOfWins;
     private Player player;
     private Player computer;
     private CHOICE playersChoice;
     private CHOICE computersChoice;
     private SCORE result;
 
-    public Game(String name) {
+    public Game(String name, int numberOfWins) {
         player = new Player(name);
         computer = new Player("Computer");
+        this.numberOfWins = numberOfWins;
     }
     public int getRoundCount() {
         return roundCount;
@@ -24,115 +28,60 @@ public class Game {
     public Player getComputer() {
         return computer;
     }
-    public CHOICE playRound() {
-        playersChoice = UserDialogs.readChoice(player.getName());
-        if (playersChoice == CHOICE.END) {
-            return CHOICE.END;
-        }
-        if (playersChoice == CHOICE.NEW) {
-            return CHOICE.NEW;
-        }
-        computersChoice = computer.drawLots();
-        cheatDrawLots2(); // do some tricks
-        System.out.println(player.getName() + ": " + playersChoice);
-        System.out.println(computer.getName() + ": " + computersChoice);
-        roundCount++;
+    public CHOICE getPlayersChoice() {
+        return playersChoice;
+    }
+    public CHOICE getComputersChoice() {
+        return computersChoice;
+    }
+
+    public CHOICE playRound(CHOICE playersChoice) {
+        this.playersChoice = playersChoice;
+        computersChoice = cheatDrawLots();
         result = getResult();
         processResult();
-        System.out.println("Current score \n" + player.getName() + ": " + player.getScore() + "\nComputer: " + computer.getScore());
-        return CHOICE.AGAIN;
+        roundCount++;
+        return ((player.getScore() > computer.getScore()) ? player.getScore() : computer.getScore()) >= numberOfWins ? CHOICE.WIN : CHOICE.CONTINUE; //?oddzielna metoda obliczająca i zwracająca wynik?
     }
-    public void processResult() {
+
+    private void processResult() {
         switch (result) {
             case PLAYER:
-                System.out.println(player.getName() + " gets score");
                 player.setScore();
-                return;
+                break;
             case COMPUTER:
-                System.out.println("Computer gets score");
                 computer.setScore();
-                return;
+                break;
             case TIE:
                 System.out.println("It is a TIE!");
-                return;
         }
     }
-    /*public SCORE getResult() {
-        if (playersChoice != computersChoice) {
-                switch (playersChoice) {
-                    case PAPER:
-                        return computersChoice == CHOICE.ROCK ? SCORE.PLAYER : SCORE.COMPUTER;
-                    case ROCK:
-                        return computersChoice == CHOICE.SCISSORS ? SCORE.PLAYER : SCORE.COMPUTER;
-                    case SCISSORS:
-                        return computersChoice == CHOICE.PAPER ? SCORE.PLAYER : SCORE.COMPUTER;
-                }
-        }
-        return SCORE.TIE;
-    }*/
-    public SCORE getResult() {
+
+    private SCORE getResult() {
         if (playersChoice != computersChoice) {
             return Cases.getCases().stream()
                     .filter(cases -> cases.getPlayersChoice().equals(playersChoice) && cases.getComputersChoice().equals(computersChoice))
                     .findFirst()
-                    //ifPresent(cases -> getResult())  ????error
-                    .get()
+                    .get() // ???
                     .getResult();
         }
         return SCORE.TIE;
     }
 
-    public CHOICE setResult(SCORE score) {
-            return Cases.getCases().stream()
-                    .filter(cases -> cases.getPlayersChoice().equals(playersChoice) && cases.getResult().equals(score))
-                    .findAny()
-                    .get()
-                    .getComputersChoice();
+    private CHOICE setResult(SCORE score, int alteredChance) {
+        List<Cases> choices = Cases.getCases().stream()
+                .filter(cases -> cases.getPlayersChoice().equals(playersChoice) && cases.getResult().equals(score))
+                .collect(Collectors.toList());
+        return    (alteredChance >= 25 && alteredChance < 37) ? choices.get(0).getComputersChoice()
+                : (alteredChance >= 37 && alteredChance < 50) ? choices.get(1).getComputersChoice()
+                : (alteredChance >= 50 && alteredChance < 75) ? choices.get(0).getComputersChoice()
+                :  choices.get(1).getComputersChoice();
     }
 
-    public void cheatDrawLots() {
+    private CHOICE cheatDrawLots() {
         int alteredChance = computer.alterComputerChance();
-        System.out.println("Altered chance: " + alteredChance);
-        alteredChance = alteredChance == 3 ? 2 : alteredChance;
-        switch (alteredChance) {
-            case 0:
-                if (playersChoice != computersChoice) {
-                    System.out.println("Giving another chance for a TIE! Computer choice was: " + computersChoice);
-                    computersChoice = computer.drawLots();// or chose proper result for computer?
-                }
-                return;
-            case 1:
-                if (getResult() == SCORE.COMPUTER || getResult() == SCORE.TIE) {
-                    System.out.println("It would be TIE or Computer(" + computersChoice + ") would win! Giving player(" + playersChoice + ") another chance!");
-                    computersChoice = computer.drawLots();// or chose proper result for computer?
-                }
-                return;
-            case 2:
-                if (getResult() == SCORE.PLAYER || getResult() == SCORE.TIE) {
-                    System.out.println("It would be TIE or Player (" + playersChoice + ")would win! Giving computer(" + computersChoice + ") another chance!");
-                    computersChoice = computer.drawLots();// or chose proper result for computer?
-                }
-                return;
-        }
-    }
-
-    public void cheatDrawLots2() {
-        int alteredChance = computer.alterComputerChance();
-        System.out.println("Altered chance: " + alteredChance);
-        alteredChance = alteredChance == 3 ? 2 : alteredChance;
-        switch (alteredChance) {
-            case 0:
-                System.out.println("Setting score to TIE!");
-                computersChoice = playersChoice;
-                return;
-            case 1:
-                System.out.println("Player is a winner");
-                computersChoice = setResult(SCORE.PLAYER);
-                return;
-            case 2:
-                System.out.println("Computer is a winner");
-                computersChoice = setResult(SCORE.COMPUTER);
-                return;
-        }
+        return    (alteredChance > 0 && alteredChance < 25) ? playersChoice
+                : (alteredChance >= 25 && alteredChance < 50) ? setResult(SCORE.PLAYER, alteredChance)
+                : setResult(SCORE.COMPUTER, alteredChance);
     }
 }
