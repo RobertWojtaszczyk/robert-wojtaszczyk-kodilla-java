@@ -41,7 +41,11 @@ public class Game {
         result = getResult();
         processResult();
         roundCount++;
-        return ((player.getScore() > computer.getScore()) ? player.getScore() : computer.getScore()) >= numberOfWins ? CHOICE.WIN : CHOICE.CONTINUE; //?oddzielna metoda obliczająca i zwracająca wynik?
+        return checkNumbersOfWins();
+    }
+
+    private CHOICE checkNumbersOfWins() {
+        return ((player.getScore() > computer.getScore()) ? player.getScore() : computer.getScore()) >= numberOfWins ? CHOICE.WIN : CHOICE.CONTINUE;
     }
 
     private void processResult() {
@@ -61,8 +65,8 @@ public class Game {
         if (playersChoice != computersChoice) {
             return Cases.getCases().stream()
                     .filter(cases -> cases.getPlayersChoice().equals(playersChoice) && cases.getComputersChoice().equals(computersChoice))
-                    .findFirst()
-                    .get() // ???
+                    .collect(Collectors.toList())
+                    .get(0)
                     .getResult();
         }
         return SCORE.TIE;
