@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Scope;
 public class BoardConfig {
     @Autowired
     @Qualifier("toDoList")
-    TaskList toDoList; // bez modyfikatora dostępu?
+    private TaskList toDoList;
     @Autowired
     @Qualifier("inProgressList")
-    TaskList inProgressList;
+    private TaskList inProgressList;
     @Autowired
     @Qualifier("doneList")
-    TaskList doneList;
+    private TaskList doneList;
 
     @Bean
     public Board getBoard() {
