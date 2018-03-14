@@ -1,7 +1,9 @@
 package com.kodilla.rps.game;
+
 import com.kodilla.rps.game.definitions.CHOICE;
 import com.kodilla.rps.game.definitions.Cases;
 import com.kodilla.rps.game.definitions.SCORE;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

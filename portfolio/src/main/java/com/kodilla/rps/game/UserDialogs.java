@@ -1,5 +1,7 @@
 package com.kodilla.rps.game;
+
 import com.kodilla.rps.game.definitions.CHOICE;
+
 import java.util.Scanner;
 
 public class UserDialogs {
