@@ -36,7 +36,3 @@ public class SearchFlight {
         return stopover1Step;
     }
 }
-/**
- * Nie dałem rady zrobić wyszukiwania z przesiadką w jednym stream'ie. Zrobiłem to tak, że najpierw do mapy stopover1Step zapisuję loty do
- * miejsca pośredniego, potem do mapy stopover2Step zapisuję loty z miejsca pośredniego do końcowego i na końcu łączę te mapy
-* */

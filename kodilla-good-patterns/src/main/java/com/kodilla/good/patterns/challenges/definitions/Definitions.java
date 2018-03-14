@@ -1,6 +1,8 @@
 package com.kodilla.good.patterns.challenges.definitions;
+
 import com.kodilla.good.patterns.challenges.Item;
 import com.kodilla.good.patterns.challenges.User;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,9 @@
 package com.kodilla.good.patterns.airlines.data;
+
 import com.kodilla.good.patterns.airlines.AircraftData;
 import com.kodilla.good.patterns.airlines.Flight;
 import com.kodilla.good.patterns.airlines.Flights;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 

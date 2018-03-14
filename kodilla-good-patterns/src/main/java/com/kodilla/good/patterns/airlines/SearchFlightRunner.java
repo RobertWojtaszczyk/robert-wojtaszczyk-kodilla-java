@@ -1,8 +1,10 @@
 package com.kodilla.good.patterns.airlines;
+
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import static com.kodilla.good.patterns.airlines.data.Data.createFlights;
 
 public class SearchFlightRunner {

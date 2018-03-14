@@ -11,7 +11,7 @@ public final class OrderProcessor {
         order.getOrder().stream()
                 .forEach(orderItem -> {
                     System.out.println(orderItem.getProduct().toString() + " Quantity: " + orderItem.getQuantity());
-                    if (orderItem.getProduct().getSupplier().process()) {
+                    if (orderItem.getProduct().getSupplier().process(new AbstractOrderDto(orderItem.getProduct().getSupplier().getName()))) {
                         System.out.println("Order accepted!\n");
                     } else {
                         System.out.println("Order rejected!\n");

@@ -13,6 +13,6 @@ public class SimpleInvoiceTestSuite {
         invoice.addItem(new SimpleItem(new SimpleProduct("Product 3",  6.49), 5.0));
         //Then
         invoice.getItems().stream().forEach(simpleItem -> System.out.println(simpleItem));
-        Assert.assertEquals(108.975, invoice.getValueToPay(), 0.00000000000001);
+        Assert.assertEquals(108.975, invoice.getValueToPay(), 1);
     }
 }

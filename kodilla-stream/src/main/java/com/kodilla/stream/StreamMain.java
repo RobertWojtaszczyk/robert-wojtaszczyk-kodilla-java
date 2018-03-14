@@ -11,8 +11,10 @@ package com.kodilla.stream;
 //import com.kodilla.stream.reference.FunctionalCalculator;
 //import com.kodilla.stream.book.Book;
 //import com.kodilla.stream.book.BookDirectory;
+
 import com.kodilla.stream.forumuser.Forum;
 import com.kodilla.stream.forumuser.ForumUser;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
