@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Row {
-    private List<Figure> columns = new ArrayList<Figure>();
+    private List<Figure> columns = new ArrayList<>();
     Figure fig = null;
     //wygenerowanie jednego pustego wiersza
     public List generateRow() {
