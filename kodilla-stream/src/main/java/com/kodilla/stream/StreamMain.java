@@ -67,6 +67,7 @@ public class StreamMain {
         };
         System.out.println(poemBeautifier.beautify("Tekst rozdzielony kropkami", lambdaExpression));
         System.out.println(poemBeautifier.beautify(".kapsw ynasipan tskeT", FunctionalCalculator::reverseString));*/
+
         /*System.out.println("Using Stream to generate even numbers from 1 to 20");
         NumbersGenerator.generateEven(20);*/
         //moduł 7.1
