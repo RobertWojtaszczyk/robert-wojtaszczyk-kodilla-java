@@ -16,7 +16,7 @@ public class UserDialogs {
                     .filter(n -> (n > 0 && n < 10))
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            System.out.println("Parameters must by a valid numbers: 1-9 separated with \",\"");
+            System.out.println("Parameters must be a valid numbers: 1-9 separated with \",\"");
             return null;
         }
         if (userNumbers.size() % 3 == 0) {
@@ -28,7 +28,7 @@ public class UserDialogs {
     }
 
     public static String getPlayerInput() {
-        System.out.print("Enter numbers or SUDOKU to resolve sudoku: ");
+        System.out.print("Enter numbers 1-9 separated with \",\" or SUDOKU to resolve sudoku: ");
         Scanner keyboardInput = new Scanner(System.in);
         String input = keyboardInput.nextLine().toUpperCase();
         if (input.equals("SUDOKU")) {
