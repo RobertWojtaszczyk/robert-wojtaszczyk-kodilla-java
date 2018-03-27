@@ -13,7 +13,11 @@ public class SudokuGame {
             if (sudokuGivenNumbers.equals("SUDOKU")) {
                 readyToSolve = true;
                 SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-                gameFinished = sudokuAlgorithm.resolveSudoku();
+                try {
+                    gameFinished = sudokuAlgorithm.resolveSudoku();
+                } catch (SudokuAlgorithmException e) {
+
+                }
             } else {
                 List<Integer> userNumbers = UserDialogs.parseUserInput(sudokuGivenNumbers);
                 if (userNumbers != null) {
