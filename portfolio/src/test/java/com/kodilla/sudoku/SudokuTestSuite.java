@@ -1,8 +1,30 @@
 package com.kodilla.sudoku;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SudokuTestSuite {
+    @Test
+    public void testSudokuCloneBoard() {
+        //Given
+        SudokuBoard sudokuBoard = new SudokuBoard();
+        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).setValue(1);
+        //When
+        SudokuBoard clonedSudokuBoard = null;
+        try {
+            clonedSudokuBoard = sudokuBoard.deepCopy();
+        } catch (CloneNotSupportedException e) {
+            System.out.println(e);
+        }
+        System.out.println(sudokuBoard);
+        System.out.println(clonedSudokuBoard);
+        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).setValue(9);
+        //Then
+        System.out.println(sudokuBoard);
+        System.out.println(clonedSudokuBoard);
+        Assert.assertFalse(sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0) == clonedSudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0));
+    }
+
     @Test
     public void testSudokuCheck2Condition() {
         //Given

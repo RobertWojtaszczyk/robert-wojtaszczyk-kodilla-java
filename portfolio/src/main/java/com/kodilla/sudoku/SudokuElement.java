@@ -8,10 +8,17 @@ public class SudokuElement {
     private List<Integer> possibleValues = new ArrayList<>();
     public static int EMPTY = -1;
 
-    public SudokuElement() {
-        for (int i = 1; i < 10; i++) {
-            this.possibleValues.add(i);
+    public SudokuElement(boolean fillPossibleValues) {
+        if (fillPossibleValues) {
+            for (int i = 1; i < 10; i++) {
+                this.possibleValues.add(i);
+            }
         }
+    }
+
+    public SudokuElement(int value, List<Integer> possibleValues) {
+        this.value = value;
+        this.possibleValues = possibleValues;
     }
 
     public boolean setValue(int value) {
