@@ -21,7 +21,7 @@ public class Item {
         this.product = product;
         this.price = price;
         this.quantity = quantity;
-        this.value = price.multiply(new BigDecimal(quantity)); // obliczenia w kontstruktorze?
+        this.value = price.multiply(new BigDecimal(quantity)); // obliczenia w kontstruktorze? w obu setterach w ilości i w cenie!!! , te dzie
     }
 
     @Id
