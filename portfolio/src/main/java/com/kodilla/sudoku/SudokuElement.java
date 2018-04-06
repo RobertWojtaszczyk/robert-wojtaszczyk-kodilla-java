@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuElement {
+    public static int EMPTY = -1;
     private int value = EMPTY;
     private List<Integer> possibleValues = new ArrayList<>();
-    public static int EMPTY = -1;
 
     public SudokuElement(boolean fillPossibleValues) {
         if (fillPossibleValues) {
@@ -25,9 +25,8 @@ public class SudokuElement {
         if ((value > 0 && value < 10) || (value == EMPTY)) {
             this.value = value;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public void setPossibleValues(List<Integer> possibleValues) {

@@ -18,22 +18,16 @@ public class SudokuTestSuite {
         newPossibleValues.add(3);
         newPossibleValues.add(4);
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).setPossibleValues(newPossibleValues);
-        System.out.println(sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).getPossibleValues());
         //When
         SudokuBoard clonedSudokuBoard = null;
         try {
             clonedSudokuBoard = sudokuBoard.deepCopy();
         } catch (CloneNotSupportedException e) {
-            System.out.println(e);
+            // do nothing
         }
-        System.out.println(sudokuBoard);
-        System.out.println(clonedSudokuBoard);
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).setValue(9);
         //Then
-        System.out.println(sudokuBoard);
-        System.out.println(clonedSudokuBoard);
-        System.out.println(clonedSudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).getPossibleValues());
-        Assert.assertFalse(sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0) == clonedSudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0));
+        Assert.assertEquals(1,clonedSudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).getValue());
         Assert.assertEquals(3,clonedSudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).getPossibleValues().size());
     }
 
@@ -44,81 +38,17 @@ public class SudokuTestSuite {
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).setValue(1);
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).setValue(2);
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(2).setValue(3);
-        System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        try {
-            sudokuAlgorithm.resolveSudoku();
-        /*sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).getPossibleValues().remove(new Integer(9));
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).getPossibleValues().remove(new Integer(9));
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(2).getPossibleValues().remove(new Integer(9));*/
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(9));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(4).getPossibleValues().remove(new Integer(9));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(5).getPossibleValues().remove(new Integer(9));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(6).getPossibleValues().remove(new Integer(9));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(7).getPossibleValues().remove(new Integer(9));
-            sudokuAlgorithm.resolveSudoku();
-        } catch (SudokuAlgorithmException e) {
-
-        }
-        System.out.println(sudokuBoard);
+        sudokuAlgorithm.resolveSudoku();
+        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(9));
+        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(4).getPossibleValues().remove(new Integer(9));
+        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(5).getPossibleValues().remove(new Integer(9));
+        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(6).getPossibleValues().remove(new Integer(9));
+        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(7).getPossibleValues().remove(new Integer(9));
+        sudokuAlgorithm.resolveSudoku();
         //Then
-
-    }
-    @Test
-    public void testSudokuCheck2Condition2() {
-        //Given
-        SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).setValue(1);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).setValue(2);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(2).setValue(3);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).setValue(4);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(4).setValue(5);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(6).setValue(6);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(7).setValue(7);
-        System.out.println(sudokuBoard);
-        //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        try {
-            sudokuAlgorithm.resolveSudoku();
-            System.out.println(sudokuBoard);
-            sudokuAlgorithm.resolveSudoku();
-            System.out.println(sudokuBoard);
-        } catch (SudokuAlgorithmException e) {
-
-        }
-        //Then
-
-    }
-    @Test
-    public void testSudokuAlgorithmThrowException() {
-        //Given
-        SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(0).setValue(1);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).setValue(2);
-        sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(2).setValue(3);
-        //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        try {
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(9));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(8));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(7));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(6));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(5));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(4));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(3));
-            sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(2));
-            System.out.println("size: " + sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().size());
-            System.out.println("value: " + sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().get(0));
-            sudokuAlgorithm.resolveSudoku();
-            System.out.println("size: " + sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().size());
-            //System.out.println("value: " + sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().get(0));
-        } catch (SudokuAlgorithmException e) {
-            System.out.println("Exception!");
-        }
-        System.out.println(sudokuBoard);
-        //Then
-
+        Assert.assertEquals(4, sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getValue());
     }
 
     @Test
@@ -153,28 +83,22 @@ public class SudokuTestSuite {
         sudokuBoard.getSudokuRows().get(7).getSudokuElements().get(7).setValue(5);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(0).setValue(6);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(5).setValue(1);
+        System.out.println("Simple sudoku test1:");
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
         int numberOfIterations = 0;
-        try {
-            boolean continueAlg = true;
-            while (continueAlg) {
-                continueAlg = sudokuAlgorithm.resolveSudoku();
-                numberOfIterations++;
-            }
-
-        } catch (SudokuAlgorithmException e) {
-            System.out.println("Exception!");
+        boolean continueAlg = true;
+        while (continueAlg) {
+            continueAlg = sudokuAlgorithm.resolveSudoku();
+            numberOfIterations++;
         }
-        System.out.println(sudokuBoard);
-        System.out.println("Number of iterations: " + numberOfIterations);
+        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
-
     }
 
     @Test
-    public void testSudokuAlgorithm2() {
+    public void testSudokuAlgorithmSimplePuzzle() {
         //Given
         SudokuBoard sudokuBoard = new SudokuBoard();
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).setValue(2);
@@ -216,25 +140,19 @@ public class SudokuTestSuite {
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(3).setValue(4);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(5).setValue(3);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(7).setValue(5);
+        System.out.println("Simple sudoku test2:");
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
         int numberOfIterations = 0;
-        try {
-            boolean continueAlg = true;
-            while (continueAlg) {
-                continueAlg = sudokuAlgorithm.resolveSudoku();
-                numberOfIterations++;
-                //continueAlg = false;
-            }
-
-        } catch (SudokuAlgorithmException e) {
-            System.out.println("Exception!");
+        boolean continueAlg = true;
+        while (continueAlg) {
+            continueAlg = sudokuAlgorithm.resolveSudoku();
+            numberOfIterations++;
+            //continueAlg = false;
         }
-        System.out.println(sudokuBoard);
-        System.out.println("Number of iterations: " + numberOfIterations);
+        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
-
     }
 
     @Test
@@ -269,25 +187,18 @@ public class SudokuTestSuite {
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(2).setValue(4);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(5).setValue(8);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(7).setValue(7);
-
+        System.out.println("Test for The Mepham diabolical Sudoku puzzle:");
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
         int numberOfIterations = 0;
-        try {
-            boolean continueAlg = true;
-            while (continueAlg) {
-                continueAlg = sudokuAlgorithm.resolveSudoku();
-                numberOfIterations++;
-            }
-
-        } catch (SudokuAlgorithmException e) {
-            System.out.println("Exception!");
+        boolean continueAlg = true;
+        while (continueAlg) {
+            continueAlg = sudokuAlgorithm.resolveSudoku();
+            numberOfIterations++;
         }
-        System.out.println(sudokuBoard);
-        System.out.println("Number of iterations: " + numberOfIterations);
+        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
-
     }
 
     @Test
@@ -317,25 +228,18 @@ public class SudokuTestSuite {
         sudokuBoard.getSudokuRows().get(7).getSudokuElements().get(8).setValue(5);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(5).setValue(1);
         sudokuBoard.getSudokuRows().get(8).getSudokuElements().get(8).setValue(8);
-
+        System.out.println("Test for Will Shortz's puzzle 301:");
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
         int numberOfIterations = 0;
-        try {
-            boolean continueAlg = true;
-            while (continueAlg) {
-                continueAlg = sudokuAlgorithm.resolveSudoku();
-                numberOfIterations++;
-            }
-
-        } catch (SudokuAlgorithmException e) {
-            System.out.println("Exception!");
+        boolean continueAlg = true;
+        while (continueAlg) {
+            continueAlg = sudokuAlgorithm.resolveSudoku();
+            numberOfIterations++;
         }
-        System.out.println(sudokuBoard);
-        System.out.println("Number of iterations: " + numberOfIterations);
+        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
-
     }
 
     @Test
@@ -367,24 +271,17 @@ public class SudokuTestSuite {
         sudokuBoard.getSudokuRows().get(7).getSudokuElements().get(0).setValue(6);
         sudokuBoard.getSudokuRows().get(7).getSudokuElements().get(4).setValue(8);
         sudokuBoard.getSudokuRows().get(7).getSudokuElements().get(8).setValue(1);
-
+        System.out.println("Test for tough puzzle:");
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
         int numberOfIterations = 0;
-        try {
-            boolean continueAlg = true;
-            while (continueAlg) {
-                continueAlg = sudokuAlgorithm.resolveSudoku();
-                numberOfIterations++;
-            }
-
-        } catch (SudokuAlgorithmException e) {
-            System.out.println("Exception!");
+        boolean continueAlg = true;
+        while (continueAlg) {
+            continueAlg = sudokuAlgorithm.resolveSudoku();
+            numberOfIterations++;
         }
-        System.out.println(sudokuBoard);
-        System.out.println("Number of iterations: " + numberOfIterations);
+        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
-
     }
 }

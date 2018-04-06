@@ -4,19 +4,21 @@ import java.util.List;
 
 public class SudokuGame {
     public static void main(String[] args) {
-        boolean gameFinished = false;
         boolean readyToSolve = false;
+        int numberOfIterations = 0;
         SudokuBoard sudokuBoard = new SudokuBoard();
+        System.out.println("Sudoku Solver");
         System.out.println(sudokuBoard);
         while (!readyToSolve) {
             String sudokuGivenNumbers = UserDialogs.getPlayerInput();
             if (sudokuGivenNumbers.equals("SUDOKU")) {
-                readyToSolve = true;
+                readyToSolve = UserDialogs.checkSudokuBoard(sudokuBoard);
                 SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-                try {
-                    gameFinished = sudokuAlgorithm.resolveSudoku();
-                } catch (SudokuAlgorithmException e) {
-
+                numberOfIterations = 0;
+                boolean continueCalculations = readyToSolve;
+                while (continueCalculations) {
+                        continueCalculations = sudokuAlgorithm.resolveSudoku();
+                        numberOfIterations++;
                 }
             } else {
                 List<Integer> userNumbers = UserDialogs.parseUserInput(sudokuGivenNumbers);
@@ -26,12 +28,12 @@ public class SudokuGame {
                                 .getSudokuRows().get(userNumbers.get(i) - 1)
                                 .getSudokuElements().get(userNumbers.get(i + 1) - 1)
                                 .setValue(userNumbers.get(i + 2));
-                        sudokuBoard.getSudokuRows().get(userNumbers.get(i) - 1).getSudokuElements().get(userNumbers.get(i + 1) - 1).getPossibleValues().clear();
                     }
                     System.out.println(sudokuBoard);
                 }
+                UserDialogs.checkSudokuBoard(sudokuBoard);
             }
         }
-        System.out.println(sudokuBoard);
+        System.out.println("Number of iterations: " + numberOfIterations + "\n");
     }
 }

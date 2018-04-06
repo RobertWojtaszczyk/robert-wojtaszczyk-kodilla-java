@@ -41,7 +41,6 @@ public class SudokuBoard extends Prototype {
             SudokuRow clonedRow = new SudokuRow(false);
             for (SudokuElement element : theRow.getSudokuElements()) {
                 clonedRow.getSudokuElements().add(new SudokuElement(element.getValue(), new ArrayList<>(element.getPossibleValues())));
-                //clonedRow.getSudokuElements().add(new SudokuElement(element.getValue(),element.getPossibleValues(), element.getRow(), element.getColumn()));
             }
             clonedSudokuBoard.getSudokuRows().add(clonedRow);
         }
