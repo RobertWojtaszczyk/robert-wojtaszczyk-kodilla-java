@@ -22,15 +22,15 @@ public class UserDialogs {
             return null;
         }
         if (userNumbers.size() % 3 == 0) {
-            int iterator =1;
+            int numberOfIterations = 1;
             for (Integer userNumber : userNumbers) {
-                if (iterator % 3 != 0) {
+                if (numberOfIterations % 3 != 0) {
                     if (userNumber < 1) {
                         System.out.println("Invalid field coordinates!");
                         return null;
                     }
                 }
-                iterator++;
+                numberOfIterations++;
             }
             return userNumbers;
         } else {
@@ -40,10 +40,10 @@ public class UserDialogs {
     }
 
     public static String getPlayerInput() {
-        System.out.print("Enter Row,Column,Value - Each number mast be between 1-9 and separated with \",\" \n" +
-                "You can enter multiple values, as many You want, eg: 1,1,1,2,2,2,3,3,3\n" +
+        System.out.print("Enter Row,Column,Value - numbers between 1-9 and separated with \",\" \n" +
+                "You can enter multiple sets of values, as many You want, for example: 1,1,1,2,2,2,3,3,3\n" +
                 "To clear field enter coordinates and value 0 with the same schema: Row,Column,0\n" +
-                "To correct value enter coordinates and new value\n" +
+                "To correct wrong value, just enter coordinates and new value\n" +
                 "When done with given numbers, enter SUDOKU to resolve sudoku: ");
         Scanner keyboardInput = new Scanner(System.in);
         String input = keyboardInput.nextLine().toUpperCase();
@@ -63,8 +63,8 @@ public class UserDialogs {
         return keyboardInput.next().toLowerCase().charAt(0);
     }
 
-    private static boolean areYouSure() {
-        System.out.println("Are You sure? (y/n)");
+    private static boolean yesNo() {
+        System.out.print("(y/n)");
         switch (getPlayerAnswer()) {
             case 'y':
                 return true;
@@ -72,10 +72,15 @@ public class UserDialogs {
                 return false;
         }
         System.out.println("Invalid input, try again...");
-        return areYouSure();
+        return yesNo();
     }
 
-    public static boolean checkSudokuBoard(SudokuBoard sudokuBoard) {
+    public static boolean resolveAnotherSudoku() {
+        System.out.println("Would You like to try another Sudoku?");
+        return yesNo();
+    }
+
+    public static boolean sudokuBoardValidator(SudokuBoard sudokuBoard) {
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
                 SudokuElement currentElement = sudokuBoard.getSudokuRows().get(y).getSudokuElements().get(x);
@@ -92,6 +97,7 @@ public class UserDialogs {
                         currentSection.add(sudokuBoard.getSudokuRows().get(j).getSudokuElements().get(i));
                     }
                 }
+
                 if (currentElement.getValue() != SudokuElement.EMPTY) {
                     int numberOfDoubledValues;
                     numberOfDoubledValues = currentRow.stream()
@@ -111,12 +117,25 @@ public class UserDialogs {
                             .reduce(0, (sum, current) -> sum = sum + current);
 
                     if (numberOfDoubledValues > 0) {
-                        System.out.println("Invalid input data! Check Your Sudoku again for provided numbers!");
+                        System.out.println("\nInvalid input data! Check Your Sudoku numbers again!\n");
                         return false;
                     }
                 }
             }
         }
         return true;
+    }
+
+    public static void fillSudokuBoard(List<Integer> userNumbers, SudokuBoard sudokuBoard) {
+        if (userNumbers != null) {
+            for (int i = 0; i <= (userNumbers.size() - 3); i += 3) {
+                sudokuBoard
+                        .getSudokuRows().get(userNumbers.get(i) - 1)
+                        .getSudokuElements().get(userNumbers.get(i + 1) - 1)
+                        .setValue(userNumbers.get(i + 2));
+            }
+            System.out.println(sudokuBoard);
+            UserDialogs.sudokuBoardValidator(sudokuBoard);
+        }
     }
 }

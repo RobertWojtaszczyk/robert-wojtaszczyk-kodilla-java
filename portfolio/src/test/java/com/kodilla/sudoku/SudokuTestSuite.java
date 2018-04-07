@@ -87,13 +87,10 @@ public class SudokuTestSuite {
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        int numberOfIterations = 0;
         boolean continueAlg = true;
         while (continueAlg) {
             continueAlg = sudokuAlgorithm.resolveSudoku();
-            numberOfIterations++;
         }
-        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
     }
 
@@ -144,14 +141,11 @@ public class SudokuTestSuite {
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        int numberOfIterations = 0;
         boolean continueAlg = true;
         while (continueAlg) {
             continueAlg = sudokuAlgorithm.resolveSudoku();
-            numberOfIterations++;
             //continueAlg = false;
         }
-        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
     }
 
@@ -191,13 +185,10 @@ public class SudokuTestSuite {
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        int numberOfIterations = 0;
         boolean continueAlg = true;
         while (continueAlg) {
             continueAlg = sudokuAlgorithm.resolveSudoku();
-            numberOfIterations++;
         }
-        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
     }
 
@@ -232,13 +223,10 @@ public class SudokuTestSuite {
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        int numberOfIterations = 0;
         boolean continueAlg = true;
         while (continueAlg) {
             continueAlg = sudokuAlgorithm.resolveSudoku();
-            numberOfIterations++;
         }
-        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
     }
 
@@ -275,13 +263,10 @@ public class SudokuTestSuite {
         System.out.println(sudokuBoard);
         //When
         SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        int numberOfIterations = 0;
         boolean continueAlg = true;
         while (continueAlg) {
             continueAlg = sudokuAlgorithm.resolveSudoku();
-            numberOfIterations++;
         }
-        System.out.println("Number of iterations: " + numberOfIterations + "\n");
         //Then
     }
 }

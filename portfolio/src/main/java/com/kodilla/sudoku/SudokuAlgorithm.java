@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class SudokuAlgorithm {
     private SudokuBoard sudokuBoard;
+    private int numberOfIterations = 0;
 
     public SudokuAlgorithm(SudokuBoard sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
@@ -13,18 +14,18 @@ public class SudokuAlgorithm {
 
     public boolean resolveSudoku() {
         boolean actionPerformed = false;
-
-        for (int y = 0; y < 9; y++) {
-            for (int x = 0; x < 9; x++) {
-                SudokuElement currentElement = sudokuBoard.getSudokuRows().get(y).getSudokuElements().get(x);
-                List<SudokuElement> currentRow = new ArrayList<>(sudokuBoard.getSudokuRows().get(y).getSudokuElements());
+        numberOfIterations++;
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                SudokuElement currentElement = sudokuBoard.getSudokuRows().get(row).getSudokuElements().get(column);
+                List<SudokuElement> currentRow = new ArrayList<>(sudokuBoard.getSudokuRows().get(row).getSudokuElements());
                 List<SudokuElement> currentColumn = new ArrayList<>();
                 for (int i = 0; i < 9; i++) {
-                    currentColumn.add(sudokuBoard.getSudokuRows().get(i).getSudokuElements().get(x));
+                    currentColumn.add(sudokuBoard.getSudokuRows().get(i).getSudokuElements().get(column));
                 }
                 List<SudokuElement> currentSection = new ArrayList<>();
-                int blockY = 3 * (y / 3);
-                int blockX = 3 * (x / 3);
+                int blockY = 3 * (row / 3);
+                int blockX = 3 * (column / 3);
                 for (int j = blockY; j < blockY + 3; j++) {
                     for (int i = blockX; i < blockX +3; i++) {
                         currentSection.add(sudokuBoard.getSudokuRows().get(j).getSudokuElements().get(i));
@@ -32,12 +33,12 @@ public class SudokuAlgorithm {
                 }
 
                 if (currentElement.getValue() != SudokuElement.EMPTY) {
-                    if (currentElement.getPossibleValues().size() > 0) {
+                    if (currentElement.getPossibleValues().size() > 0) {    //sprawdzać czy za każdym razem czyścić?
                         currentElement.getPossibleValues().clear();
                     }
                 } else {
                     if (currentElement.getPossibleValues().size() == 0) {
-                        return noFieldPossibleValues();
+                        return emptyPossibleValuesListError();
                     } else {
                         List<Integer> newPossibleValues = currentElement.getPossibleValues().stream()
                                 .filter(possibleValue -> currentRow.stream()
@@ -52,7 +53,7 @@ public class SudokuAlgorithm {
                             actionPerformed = true;
                         }
 
-                        List<Integer> elementsToPutInCurrentField = currentElement.getPossibleValues().stream()
+                        List<Integer> valuesToPutInCurrentField = currentElement.getPossibleValues().stream()
                                 .filter(possibleValue -> currentRow.stream()
                                         .filter(sudokuElement -> !sudokuElement.equals(currentElement))
                                         .flatMap(sudokuElement -> sudokuElement.getPossibleValues().stream())
@@ -66,8 +67,8 @@ public class SudokuAlgorithm {
                                         .flatMap(sudokuElement -> sudokuElement.getPossibleValues().stream())
                                         .noneMatch(possibleValue::equals))
                                 .collect(Collectors.toList());
-                        if (elementsToPutInCurrentField.size() > 0) {
-                            currentElement.setValue(elementsToPutInCurrentField.get(0));
+                        if (valuesToPutInCurrentField.size() > 0) {
+                            currentElement.setValue(valuesToPutInCurrentField.get(0));
                             currentElement.getPossibleValues().clear();
                             actionPerformed = true;
                         }
@@ -81,6 +82,7 @@ public class SudokuAlgorithm {
                 }
             }
         }
+
         int numberOfEmptyFields = sudokuBoard.getSudokuRows().stream()
                 .flatMap(sudokuRow -> sudokuRow.getSudokuElements().stream())
                 .filter(sudokuElement -> sudokuElement.getValue() == SudokuElement.EMPTY)
@@ -89,6 +91,7 @@ public class SudokuAlgorithm {
 
         if (numberOfEmptyFields == 0) {
             System.out.println(sudokuBoard);
+            System.out.println("Number of iterations: " + numberOfIterations + "\n");
             return false;
         } else {
             return actionPerformed || guessValueForEmptyElement();
@@ -114,23 +117,25 @@ public class SudokuAlgorithm {
         }
 
         if ((firstEmptyElement != null) && (firstEmptyElement.getPossibleValues().size() > 0)) {
-            SudokuBoard clonedSudokuBoard = null;
-            SudokuBoardDTO sudokuBoardDTO = null;
             firstEmptyElementValue = firstEmptyElement.getPossibleValues().get(0);
             try {
-                clonedSudokuBoard = sudokuBoard.deepCopy();
-                sudokuBoardDTO = new SudokuBoardDTO(clonedSudokuBoard, firstEmptyElementValue, firstEmptyElementRow, firstEmptyElementColumn);
+                SudokuBoard clonedSudokuBoard = sudokuBoard.deepCopy();
+                SudokuBoardDTO sudokuBoardDTO = new SudokuBoardDTO(clonedSudokuBoard, firstEmptyElementValue, firstEmptyElementRow, firstEmptyElementColumn);
                 SudokuBacktrack.getBacktrack().add(sudokuBoardDTO);
             } catch (CloneNotSupportedException e) {
-                System.out.println("Failed making a copy of current board" + e);   //print e -> ???????????????????????????
+                System.out.println("Failed making a copy of current board" + e);   //print e -> ???
+                return false;
             }
-            firstEmptyElement.setValue(firstEmptyElementValue); //  SETTING UP A GUESS VALUE TO CHOSEN FIELD!!!
+            firstEmptyElement.setValue(firstEmptyElementValue);
             return true;
+        } else {
+            System.out.println("Algorithm ERROR!");
+            return false;
         }
-        return false;
+
     }
 
-    private boolean noFieldPossibleValues() {
+    private boolean emptyPossibleValuesListError() {
         if (SudokuBacktrack.getBacktrack().size() > 0) {
             SudokuBoardDTO previousCopy = SudokuBacktrack.getBacktrack().get(SudokuBacktrack.getBacktrack().size() - 1);
             sudokuBoard = previousCopy.getSudokuBoard();
