@@ -5,12 +5,27 @@ import org.junit.Test;
 public class LinkedListTestSuite {
     @Test
     public void testLinkedList() {
-        Collection<Integer> collection = new Collection<>();
-        int numberOfElements = 10;
+        Collection<String> collection = new Collection<>();
+        collection.add("first");
+        collection.add("second");
+        System.out.println(collection.get(1));
+        System.out.println(collection.get(0));
+        System.out.println(collection.size());
+        System.out.println(collection.remove(0));
+        System.out.println(collection.get(0));
+        System.out.println(collection.size());
+
+
+
+
+
+
+        /*int numberOfElements = 10;
         //wypełnienie kolekcji
         for (int i = 0; i < numberOfElements; i++) {
             //collection.add(new Element<String>("Test" + i));
-            collection.add(new Element<>(i));
+            //collection.add(new Element<>(i));
+            collection.add(i);
         }
         // wyświetlenie wszystkich elementów kolekcji, w pętli celowo przekraczam zakres
         for (int i = 0; i < collection.size() + 1; i++) {
@@ -37,6 +52,6 @@ public class LinkedListTestSuite {
         }
         for (int i = 0; i < collection.size(); i++) {
             System.out.println(collection.get(i));
-        }
+        }*/
     }
 }

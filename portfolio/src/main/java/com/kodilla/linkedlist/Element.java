@@ -2,8 +2,8 @@ package com.kodilla.linkedlist;
 
 public class Element<T> {
     private T value;
-    private Element next = null;
-    private Element prev = null;
+    private Element<T> next = null;
+    private Element<T> prev = null;
 
     public Element (T value) {
         this.value = value;
@@ -13,19 +13,19 @@ public class Element<T> {
         return this.value;
     }
 
-    public Element getNext() {
+    public Element<T> getNext() {
         return this.next;
     }
 
-    public Element getPrev() {
+    public Element<T> getPrev() {
         return this.prev;
     }
 
-    public void setNext(Element next) {
+    public void setNext(Element<T> next) {
         this.next = next;
     }
 
-    public void setPrev(Element prev) {
+    public void setPrev(Element<T> prev) {
         this.prev = prev;
     }
 }
