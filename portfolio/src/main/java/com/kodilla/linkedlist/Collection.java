@@ -6,8 +6,8 @@ public class Collection<T> implements Iterable<T> {
     private Element<T> collectionHead = null;
     private int size;
 
-    public int getSize() {
-        return size;
+    public int size() {
+        return this.size;
     }
 
     public void add(T e) {
@@ -36,7 +36,21 @@ public class Collection<T> implements Iterable<T> {
         return temp.getValue();
     }
 
-    public boolean remove(int n) {
+    public void clear() {
+        /*Element<T> temp = collectionHead;
+        int rangeCheck = 0;
+        while (rangeCheck < size) {
+            if (temp.getNext() != null) {
+                temp = temp.getNext();
+                temp.getPrev().setNext(null);
+            }
+            rangeCheck++;
+        }*/
+        collectionHead = null;
+        size = 0;
+    }
+
+    public void remove(int n) {
         checkIndex(n);
         Element<T> temp = collectionHead;
 
@@ -45,45 +59,30 @@ public class Collection<T> implements Iterable<T> {
             temp = temp.getNext();
             rangeCheck++;
         }
-        if (rangeCheck > 0 && temp.getNext() == null) {
+
+        if (rangeCheck > 0 && n == (size - 1)) {
             temp.getPrev().setNext(null);
-            size--;
-            return true;
-        }
-        if (n == 0) {
+        } else if (n == 0) {
             if (temp.getNext() != null) {
                 temp.getNext().setPrev(null);
                 collectionHead = temp.getNext();
             } else {
                 collectionHead = null;
             }
-            size--;
-            return true;
+        } else {
+            temp.getPrev().setNext(temp.getNext());
+            temp.getNext().setPrev(temp.getPrev());
         }
-        temp.getPrev().setNext(temp.getNext());
-        temp.getNext().setPrev(temp.getPrev());
         size--;
-        return true;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     private void checkIndex(int n) {
-        if (n >= size) {
+        if (n >= size || n < 0) {
             throw new IndexOutOfBoundsException("Index: " + n + ", size: " + size);
-        }
-    }
-
-    public int size() {
-        int rangeCheck;
-        Element<T> temp = collectionHead;
-        if (collectionHead == null) {
-            return 0;
-        } else {
-            rangeCheck = 1;
-            while (temp.getNext() != null) {
-                temp = temp.getNext();
-                rangeCheck++;
-            }
-            return rangeCheck;
         }
     }
 
@@ -108,38 +107,3 @@ public class Collection<T> implements Iterable<T> {
         }
     }
 }
-
-/*
-*         public boolean hasNext() {
-            return cursor != size;
-        }
-
-        @SuppressWarnings("unchecked")
-        public E next() {
-            checkForComodification();
-            int i = cursor;
-            if (i >= size)
-                throw new NoSuchElementException();
-            Object[] elementData = ArrayList.this.elementData;
-            if (i >= elementData.length)
-                throw new ConcurrentModificationException();
-            cursor = i + 1;
-            return (E) elementData[lastRet = i];
-        }
-
-        public void remove() {
-            if (lastRet < 0)
-                throw new IllegalStateException();
-            checkForComodification();
-
-            try {
-                ArrayList.this.remove(lastRet);
-                cursor = lastRet;
-                lastRet = -1;
-                expectedModCount = modCount;
-            } catch (IndexOutOfBoundsException ex) {
-                throw new ConcurrentModificationException();
-            }
-        }
-*
-* */
