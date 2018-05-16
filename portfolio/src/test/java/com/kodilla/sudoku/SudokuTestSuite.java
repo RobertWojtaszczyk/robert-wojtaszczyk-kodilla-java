@@ -39,14 +39,14 @@ public class SudokuTestSuite {
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(1).setValue(2);
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(2).setValue(3);
         //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
-        sudokuAlgorithm.resolveSudoku();
+        Algorithm algorithm = new Algorithm(sudokuBoard);
+        algorithm.resolveSudoku();
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getPossibleValues().remove(new Integer(9));
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(4).getPossibleValues().remove(new Integer(9));
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(5).getPossibleValues().remove(new Integer(9));
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(6).getPossibleValues().remove(new Integer(9));
         sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(7).getPossibleValues().remove(new Integer(9));
-        sudokuAlgorithm.resolveSudoku();
+        algorithm.resolveSudoku();
         //Then
         Assert.assertEquals(4, sudokuBoard.getSudokuRows().get(0).getSudokuElements().get(3).getValue());
     }
@@ -86,10 +86,10 @@ public class SudokuTestSuite {
         System.out.println("Simple sudoku test1:");
         System.out.println(sudokuBoard);
         //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
+        Algorithm algorithm = new Algorithm(sudokuBoard);
         boolean continueAlg = true;
         while (continueAlg) {
-            continueAlg = sudokuAlgorithm.resolveSudoku();
+            continueAlg = algorithm.resolveSudoku();
         }
         //Then
     }
@@ -140,10 +140,10 @@ public class SudokuTestSuite {
         System.out.println("Simple sudoku test2:");
         System.out.println(sudokuBoard);
         //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
+        Algorithm algorithm = new Algorithm(sudokuBoard);
         boolean continueAlg = true;
         while (continueAlg) {
-            continueAlg = sudokuAlgorithm.resolveSudoku();
+            continueAlg = algorithm.resolveSudoku();
             //continueAlg = false;
         }
         //Then
@@ -184,10 +184,10 @@ public class SudokuTestSuite {
         System.out.println("Test for The Mepham diabolical Sudoku puzzle:");
         System.out.println(sudokuBoard);
         //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
+        Algorithm algorithm = new Algorithm(sudokuBoard);
         boolean continueAlg = true;
         while (continueAlg) {
-            continueAlg = sudokuAlgorithm.resolveSudoku();
+            continueAlg = algorithm.resolveSudoku();
         }
         //Then
     }
@@ -222,10 +222,10 @@ public class SudokuTestSuite {
         System.out.println("Test for Will Shortz's puzzle 301:");
         System.out.println(sudokuBoard);
         //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
+        Algorithm algorithm = new Algorithm(sudokuBoard);
         boolean continueAlg = true;
         while (continueAlg) {
-            continueAlg = sudokuAlgorithm.resolveSudoku();
+            continueAlg = algorithm.resolveSudoku();
         }
         //Then
     }
@@ -262,10 +262,10 @@ public class SudokuTestSuite {
         System.out.println("Test for tough puzzle:");
         System.out.println(sudokuBoard);
         //When
-        SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
+        Algorithm algorithm = new Algorithm(sudokuBoard);
         boolean continueAlg = true;
         while (continueAlg) {
-            continueAlg = sudokuAlgorithm.resolveSudoku();
+            continueAlg = algorithm.resolveSudoku();
         }
         //Then
     }

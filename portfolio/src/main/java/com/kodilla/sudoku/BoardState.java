@@ -1,12 +1,12 @@
 package com.kodilla.sudoku;
 
-public class SudokuBoardDTO {
+public class BoardState {
     private final SudokuBoard sudokuBoard;
     private final int guessSudokuElementValue;
     private final int guessSudokuElementRow;
     private final int guessSudokuElementColumn;
 
-    public SudokuBoardDTO(final SudokuBoard sudokuBoard, final int guessSudokuElementValue, final int guessSudokuElementRow, final int guessSudokuElementColumn) {
+    public BoardState(final SudokuBoard sudokuBoard, final int guessSudokuElementValue, final int guessSudokuElementRow, final int guessSudokuElementColumn) {
         this.sudokuBoard = sudokuBoard;
         this.guessSudokuElementValue = guessSudokuElementValue;
         this.guessSudokuElementRow = guessSudokuElementRow;

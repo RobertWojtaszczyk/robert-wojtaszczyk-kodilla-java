@@ -37,15 +37,6 @@ public class Collection<T> implements Iterable<T> {
     }
 
     public void clear() {
-        /*Element<T> temp = collectionHead;
-        int rangeCheck = 0;
-        while (rangeCheck < size) {
-            if (temp.getNext() != null) {
-                temp = temp.getNext();
-                temp.getPrev().setNext(null);
-            }
-            rangeCheck++;
-        }*/
         collectionHead = null;
         size = 0;
     }

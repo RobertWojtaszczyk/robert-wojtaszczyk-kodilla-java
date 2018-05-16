@@ -3,9 +3,6 @@ package com.kodilla.poemgenerator;
 import java.util.Random;
 
 public class Sentence {
-    String subject;
-    String predicate;
-    String adverbial;
     public String generate() {
         Subject subject = new Subject();
         Predicate predicate = new Predicate();

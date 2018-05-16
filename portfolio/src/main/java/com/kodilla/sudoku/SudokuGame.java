@@ -13,11 +13,11 @@ public class SudokuGame {
             while (!readyToSolve) {
                 String sudokuGivenNumbers = UserDialogs.getPlayerInput();
                 if (sudokuGivenNumbers.equals("SUDOKU")) {
-                    readyToSolve = UserDialogs.sudokuBoardValidator(sudokuBoard);
-                    SudokuAlgorithm sudokuAlgorithm = new SudokuAlgorithm(sudokuBoard);
+                    Algorithm algorithm = new Algorithm(sudokuBoard);
+                    readyToSolve = algorithm.validateBoardValues();
                     boolean continueCalculations = readyToSolve;
                     while (continueCalculations) {
-                        continueCalculations = sudokuAlgorithm.resolveSudoku();
+                        continueCalculations = algorithm.resolveSudoku();
                     }
                 } else {
                     List<Integer> userNumbers = UserDialogs.parseUserInput(sudokuGivenNumbers);

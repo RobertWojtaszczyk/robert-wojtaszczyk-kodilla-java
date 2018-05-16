@@ -135,7 +135,18 @@ public class UserDialogs {
                         .setValue(userNumbers.get(i + 2));
             }
             System.out.println(sudokuBoard);
-            UserDialogs.sudokuBoardValidator(sudokuBoard);
+            Algorithm algorithm = new Algorithm(sudokuBoard);
+            algorithm.validateBoardValues();
+//            UserDialogs.sudokuBoardValidator(sudokuBoard);
         }
+    }
+
+    public static void printResults(SudokuBoard sudokuBoard, int numberOfIterations) {
+        System.out.println(sudokuBoard);
+        System.out.println("Number of iterations: " + numberOfIterations + "\n");
+    }
+
+    public static void wrongSudokuValues() {
+        System.out.println("\nInvalid input data! Check Your Sudoku numbers again!\n");
     }
 }

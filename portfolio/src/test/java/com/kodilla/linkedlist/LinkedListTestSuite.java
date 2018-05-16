@@ -115,6 +115,7 @@ public class LinkedListTestSuite {
             count++;
         }
         //Then
+
         Assert.assertEquals(3, count);
         Assert.assertEquals(3, collection.size());
     }

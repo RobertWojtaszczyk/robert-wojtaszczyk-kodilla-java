@@ -1,15 +1,23 @@
 package com.kodilla.poemgenerator;
 
+import com.kodilla.linkedlist.Collection;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Poem {
-    ArrayList<String> poem = new ArrayList<String>();
-    public ArrayList<String> generate(int rowCount) {
-        Sentence sentence = null;
+//    private List<String> poem = new ArrayList<>();
+    private Collection<String> poem2 = new Collection<>();
+
+//    public List<String> generate(int rowCount) {
+    public Collection<String> generate(int rowCount) {
+        Sentence sentence;
         for (int i = 0; i < rowCount; i++) {
             sentence = new Sentence();
-            poem.add(sentence.generate());
+            poem2.add(sentence.generate());
         }
-        return poem;
+        return poem2;
+//        return poem;
     }
+
 }
