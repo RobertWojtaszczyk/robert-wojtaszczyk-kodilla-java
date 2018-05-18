@@ -1,5 +1,8 @@
 package com.kodilla.patterns2.observer.forum;
 
+import com.kodilla.patterns2.observer.Observable;
+import com.kodilla.patterns2.observer.Observer;
+
 import java.util.ArrayList;
 import java.util.List;
 
